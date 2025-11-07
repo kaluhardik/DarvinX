@@ -1,76 +1,127 @@
 import React from 'react';
 import Spline from '@splinetool/react-spline';
-
-import fireWallIcon from '../../assets/fireWall.svg';   // firewall/flame
-import endpointIcon from '../../assets/endpoint.svg';   // network / gear
-import adrIcon from '../../assets/adr.svg';             // globe+shield
-import cloudIcon from '../../assets/cloud.svg';         // cloud chip
-import wafIcon from '../../assets/waf.svg';             // alert triangle
+import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 import vorxocGreenLogo from '../../assets/vorxocGreen.svg';
+// import BounceCards from './BounceCards';
+
+// Endpoint Logos
+import CrowdStrikeLogo from '../../assets/EndpointLogos/CrowdStrike_logo.svg';
+import ESETLogo from '../../assets/EndpointLogos/ESET_logo.svg';
+import KasperskyLogo from '../../assets/EndpointLogos/Kaspersky_logo.svg';
+import McAfeeLogo from '../../assets/EndpointLogos/McAfee_logo.svg';
+import SentinelOneLogo from '../../assets/EndpointLogos/SentinelOne_logo.svg';
 
 import './UnifiedSolution.scss';
 
 export function UnifiedSolution() {
+  const endpointLogos = [
+    CrowdStrikeLogo,
+    ESETLogo,
+    KasperskyLogo,
+    McAfeeLogo,
+    SentinelOneLogo
+  ];
+
+  const transformStyles = [
+    "rotate(5deg) translate(-150px)",
+    "rotate(0deg) translate(-70px)",
+    "rotate(-5deg)",
+    "rotate(5deg) translate(70px)",
+    "rotate(-5deg) translate(150px)"
+  ];
+
   return (
     <section className="unified-solution">
-      <div className="unified-solution__container">
-        {/* Heading */}
-        <header className="unified-solution__header">
-          <h2 className="unified-solution__title">Unified Solution</h2>
-          <p className="unified-solution__subtitle">
-            Monitor everything from one centralized platform
-          </p>
-        </header>
+      {/* Full-width Spline scene */}
+      <div className="unified-solution__spline-wrapper">
+        <Spline scene="robotScene.splinecode" wasmPath="/" />
+      </div>
 
-        {/* Stage = watermark + cluster */}
-        <div className="unified-solution__stage">
-          {/* giant pale watermark behind robot */}
-          <div className="unified-solution__watermark"><img src={vorxocGreenLogo} alt="VORXOC Green Logo" /></div>
-
-          {/* cluster = 3 rows of tiles wrapped around robot */}
-          <div className="unified-solution__cluster">
-            {/* Row 1 - TOP (Firewall | Endpoint) */}
-            <div className="cluster__row cluster__row--top">
-              <div className="cluster__card">
-                <img src={fireWallIcon} alt="Firewall Security" />
-              </div>
-              <div className="cluster__card">
-                <img src={endpointIcon} alt="Endpoint Management" />
-              </div>
-            </div>
-
-            {/* Row 2 - MIDDLE (Globe | Robot | Cloud) */}
-            <div className="cluster__row cluster__row--middle">
-              <div className="cluster__card">
-                <img src={adrIcon} alt="Global Protection" />
-              </div>
-
-              <div className="cluster__robot">
-                <Spline scene="robotScene.splinecode" wasmPath="/" />
-              </div>
-
-              <div className="cluster__card">
-                <img src={cloudIcon} alt="Cloud Intelligence" />
-              </div>
-            </div>
-
-            {/* Row 3 - BOTTOM (Alert | spacer | Alert) */}
-            <div className="cluster__row cluster__row--bottom">
-              <div className="cluster__card">
-                <img src={wafIcon} alt="Threat Detection" />
-              </div>
-
-              {/* spacer = same width as robot so the two bottom cards sit left/right of robot hips,
-                 just like your reference. */}
-              <div className="cluster__spacer" />
-
-              <div className="cluster__card">
-                <img src={wafIcon} alt="Incident Analysis" />
-              </div>
+      {/* Main Content Section */}
+      <div className="unified-solution__content">
+        {/* Center Content */}
+        <div className="unified-solution__main-content">
+          {/* Branding */}
+          <div className="unified-solution__branding">
+            <div className="unified-solution__branding-wrapper">
+              <img src={vorxocGreenLogo} alt="VORXOC" className="unified-solution__logo" />
+              <span className="unified-solution__by-line">By Helxon</span>
             </div>
           </div>
+
+          {/* Main Headline */}
+          <h1 className="unified-solution__headline">
+            All your security tools.<br />
+            One intelligent SOC platform
+          </h1>
+
+          {/* Sub-headline */}
+          <div className="unified-solution__sub-headline">
+            <p>Monitor Everything.</p>
+            <p>Catch Every Threat.</p>
+            <p>Respond Instantly.</p>
+          </div>
+
+          {/* Description */}
+          <p className="unified-solution__description">
+            VORxoc by Helxon is a unified Security Operations Center as a Service (SOCaaS) platform 
+            that integrates with any security tool or data source giving you total visibility, faster 
+            detection, and automated response from one intelligent platform.
+          </p>
+
+          {/* Learn More Button */}
+          <button className="unified-solution__learn-more-btn">
+            <span>Learn More</span>
+            <svg 
+              width="20" 
+              height="20" 
+              viewBox="0 0 20 20" 
+              fill="none" 
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path 
+                d="M7.5 15L12.5 10L7.5 5" 
+                stroke="currentColor" 
+                strokeWidth="2" 
+                strokeLinecap="round" 
+                strokeLinejoin="round"
+              />
+            </svg>
+          </button>
         </div>
       </div>
+
+      {/* Seamless Integration Section */}
+      <div className="unified-solution__integration">
+        <div className="unified-solution__integration-icon">
+          <DotLottieReact
+            src="https://lottie.host/b32a48b1-def6-42a7-bfbf-8f81a44af1e2/wyVSxiXQYK.lottie"
+            loop
+            autoplay
+          />
+        </div>
+        <h2 className="unified-solution__integration-title">Seamless Integration</h2>
+        <p className="unified-solution__integration-description">
+          VORxoc connects effortlessly with your existing ecosystem from firewalls, SIEMs, cloud workloads, 
+          and endpoints to identity systems and compliance tools. Our platform supports API-based integration 
+          with industry leaders.
+        </p>
+      </div>
+
+      {/* Bounce Cards Section */}
+      {/* <div className="unified-solution__bounce-cards">
+        <BounceCards
+          className="unified-solution__bounce-cards-component"
+          images={endpointLogos}
+          containerWidth={500}
+          containerHeight={250}
+          animationDelay={1}
+          animationStagger={0.08}
+          easeType="elastic.out(1, 0.5)"
+          transformStyles={transformStyles}
+          enableHover={true}
+        />
+      </div> */}
     </section>
   );
 }
