@@ -87,7 +87,17 @@
       "/about-us",
       "/contact-us",
       "/faq"
-    ]
+    ],
+    "puppeteerArgs": [
+      "--no-sandbox",
+      "--disable-setuid-sandbox",
+      "--disable-dev-shm-usage",
+      "--disable-gpu",
+      "--no-first-run",
+      "--no-zygote",
+      "--single-process"
+    ],
+    "headless": true
   },
   "browserslist": {
     "production": [
