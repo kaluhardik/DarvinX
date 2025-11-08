@@ -95,10 +95,24 @@
       "--disable-gpu",
       "--no-first-run",
       "--no-zygote",
-      "--single-process"
+      "--single-process",
+      "--disable-webgl",           // turn WebGL off cleanly
+      "--disable-3d-apis"
     ],
     "headless": true,
-    "puppeteerExecutablePath": "${PUPPETEER_EXECUTABLE_PATH}"
+    "puppeteerExecutablePath": "${PUPPETEER_EXECUTABLE_PATH}",
+    "skipThirdPartyRequests": true,
+    "removeStyleTags": false,
+    "removeScriptTags": false,
+    "removeBlobs": false,
+    "cache": false,
+    "publicPath": "/",
+    "minifyHtml": {
+     "collapseWhitespace": true,
+     "removeComments": true
+  },
+  // ---------  ignore the WebGL error  ----------
+  "handlePageError": "(error) => { if (/WebGL|@splinetool|runtime\\.js/.test(error.toString())) return false; }"
   },
   "browserslist": {
     "production": [
