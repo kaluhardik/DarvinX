@@ -47,12 +47,16 @@ jobs:
           # install if you have not done so
           npx puppeteer browsers install chrome@stable
           # print absolute path
-          echo "bin=$(find ~/.cache/puppeteer -name chrome -type f | head -n1)" >> $GITHUB_OUTPUT
+          echo "bin=$(find ~/.cache/puppeteer -name chrome -type f -executable | head -n1)" >> $GITHUB_OUTPUT
 
       - name: Install dependencies and build
         env:
           PUPPETEER_EXECUTABLE_PATH: ${{ steps.chrome.outputs.bin }}
         run: |
+          # overwrite the field on the fly
+          tmp=$(mktemp)
+          jq --arg p "$PUPPETEER_EXECUTABLE_PATH" \
+             '.reactSnap.puppeteerExecutablePath = $p' package.json > "$tmp" && mv "$tmp" package.json
           npm install
           npm run build
 
@@ -81,5 +85,6 @@ jobs:
         with:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_RED_FIELD_037ADA910 }}
           action: "close"
+
 
 
