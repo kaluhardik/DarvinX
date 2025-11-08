@@ -111,7 +111,7 @@
      "collapseWhitespace": true,
      "removeComments": true
   },
-  "handlePageError": "(err) => { const str = err.toString(); return !(str.includes('WebGL') || str.includes('wasm') || str.includes('splinetool')); }"
+  "handlePageError": "() => false"
   },
   "browserslist": {
     "production": [
