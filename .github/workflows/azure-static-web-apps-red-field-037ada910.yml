@@ -41,7 +41,17 @@ jobs:
         with:
           node-version: '20'
 
+      - name: Find Chrome
+        id: chrome
+        run: |
+          # install if you have not done so
+          npx puppeteer browsers install chrome@stable
+          # print absolute path
+          echo "bin=$(find ~/.cache/puppeteer -name chrome -type f | head -n1)" >> $GITHUB_OUTPUT
+
       - name: Install dependencies and build
+        env:
+          PUPPETEER_EXECUTABLE_PATH: ${{ steps.chrome.outputs.bin }}
         run: |
           npm install
           npm run build
@@ -71,4 +81,5 @@ jobs:
         with:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_RED_FIELD_037ADA910 }}
           action: "close"
+
 
