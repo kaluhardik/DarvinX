@@ -111,7 +111,7 @@
      "collapseWhitespace": true,
      "removeComments": true
   },
-  "handlePageError": "(error) => { if (/WebGL|@splinetool|runtime\\.js/.test(error.toString())) return false; }"
+  "handlePageError": "(err) => { const str = err.toString(); return !(str.includes('WebGL') || str.includes('wasm') || str.includes('splinetool')); }"
   },
   "browserslist": {
     "production": [
