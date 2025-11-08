@@ -31,6 +31,10 @@ jobs:
             libatk-bridge2.0-0 libpangocairo-1.0-0 libcups2 \
             libdrm2 libgbm1 libgtk-3-0
 
+       # 2. Install Chromium (Puppeteer will use it instead of downloading)
+      - name: Install Chromium
+        run: npx puppeteer browsers install chrome
+
       # 🧩 Step 2: Install Node and build app (ensures Puppeteer works if required)
       - name: Install Node.js
         uses: actions/setup-node@v3
@@ -67,3 +71,4 @@ jobs:
         with:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_RED_FIELD_037ADA910 }}
           action: "close"
+
