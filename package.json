@@ -96,7 +96,7 @@
       "--no-first-run",
       "--no-zygote",
       "--single-process",
-      "--disable-webgl",           // turn WebGL off cleanly
+      "--disable-webgl",           
       "--disable-3d-apis"
     ],
     "headless": true,
@@ -111,7 +111,6 @@
      "collapseWhitespace": true,
      "removeComments": true
   },
-  // ---------  ignore the WebGL error  ----------
   "handlePageError": "(error) => { if (/WebGL|@splinetool|runtime\\.js/.test(error.toString())) return false; }"
   },
   "browserslist": {
