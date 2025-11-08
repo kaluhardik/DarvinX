@@ -15,21 +15,28 @@ jobs:
     if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed')
     runs-on: ubuntu-latest
     name: Build and Deploy Job
+    env:
+      # 👇 Skip Chromium download and Puppeteer setup during build
+      PUPPETEER_SKIP_CHROMIUM_DOWNLOAD: true
+      PUPPETEER_SKIP_DOWNLOAD: true
+      CI: false
+
     steps:
       - uses: actions/checkout@v3
         with:
           submodules: true
           lfs: false
 
-      # 🧩 Added step: install Chrome dependencies for Puppeteer
-      - name: Install Chrome dependencies for Puppeteer
+      - name: Install Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      # 🧩 Skip Puppeteer & build your app normally
+      - name: Install dependencies and build
         run: |
-          sudo apt-get update
-          sudo apt-get install -y \
-            libx11-xcb1 libxcomposite1 libxcursor1 libxdamage1 libxi6 \
-            libxtst6 libnss3 libxrandr2 libasound2t64 libatk1.0-0 \
-            libatk-bridge2.0-0 libpangocairo-1.0-0 libcups2 \
-            libdrm2 libgbm1 libgtk-3-0
+          npm ci
+          npm run build
 
       - name: Build And Deploy
         id: builddeploy
@@ -38,8 +45,7 @@ jobs:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_RED_FIELD_037ADA910 }}
           repo_token: ${{ secrets.GITHUB_TOKEN }} # Used for Github integrations (i.e. PR comments)
           action: "upload"
-          ###### Repository/Build Configurations - These values can be configured to match your app requirements. ######
-          # For more information regarding Static Web App workflow configurations, please visit: https://aka.ms/swaworkflowconfig
+          ###### Repository/Build Configurations ######
           app_location: "/" # App source code path
           api_location: "" # Api source code path - optional
           output_location: "build" # Built app content directory - optional
@@ -56,4 +62,3 @@ jobs:
         with:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_RED_FIELD_037ADA910 }}
           action: "close"
-
